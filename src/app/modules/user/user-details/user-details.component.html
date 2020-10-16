@@ -1,0 +1,11 @@
+<div *ngIf="user; else loading">
+    <h1>Hello, {{user.name}}!</h1>
+    <p>ID: {{user.id}}</p>
+    <p>Email: {{user.email}}</p>
+</div>
+<div>
+    <a routerLink="/users">[Back]</a>
+</div>
+<ng-template #loading>
+    Loading...
+</ng-template>

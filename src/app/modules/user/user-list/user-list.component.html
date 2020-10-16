@@ -1,0 +1,11 @@
+<div *ngIf="users.length > 0; else loading">
+    <mat-selection-list [multiple]="false" >
+        <div *ngFor="let user of users" [value]="user.name">
+            <app-user-element [user]="user"></app-user-element>
+        </div>
+    </mat-selection-list>
+</div>
+<ng-template #loading>
+    Loading...
+</ng-template>
+
