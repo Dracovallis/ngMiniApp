@@ -4,7 +4,7 @@
             <table class="user-details-table">
                 <tr>
                     <th colspan="2">
-                        User details for {{user.name}}
+                        User details for <span class="user-details-user-name">{{user.name}}</span>
                     </th>
                 </tr>
                 <tr>
@@ -42,7 +42,8 @@
                 <tr>
                     <th colspan="2">
                         <a class="go-back-button" routerLink="/users">
-                            <mat-icon>keyboard_backspace</mat-icon>
+                            <button mat-raised-button color="primary">Back</button>
+
                         </a>
                     </th>
                 </tr>
