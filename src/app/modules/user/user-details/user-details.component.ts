@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UserModel} from '../user.model';
 import {UserService} from '../user.service';
+import {LoaderComponent} from '../../core/loader/loader.component';
 
 @Component({
     selector: 'app-user-details',
@@ -11,6 +12,9 @@ import {UserService} from '../user.service';
 export class UserDetailsComponent implements OnInit {
 
     user: UserModel;
+    displayedColumns: string[] = ['email'];
+
+
 
     constructor(private route: ActivatedRoute, private userService: UserService) {
     }
