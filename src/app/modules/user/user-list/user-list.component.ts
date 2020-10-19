@@ -12,13 +12,23 @@ import {MatSort} from '@angular/material/sort';
     styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit, AfterViewInit {
-    displayedColumns: string[] = ['id', 'name', 'email', 'actions'];
+    columnDefinitions = [
+        {def: ['id', 'name', 'email', 'date_created', 'actions'], showMobile: false},
+        {def: ['id', 'name', 'actions'], showMobile: true},
+    ];
     usersDataSource;
+    currentDisplay;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(private userService: UserService) {
+        if (window.innerWidth < 500) {
+            this.currentDisplay = 'mobile';
+        } else {
+            this.currentDisplay = 'desktop';
+        }
+
     }
 
     ngOnInit(): void {
@@ -39,6 +49,13 @@ export class UserListComponent implements OnInit, AfterViewInit {
     applyFilter(event: Event): void {
         const filterValue = (event.target as HTMLInputElement).value;
         this.usersDataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    getDisplayedColumns(): string[] {
+        const isMobile = this.currentDisplay === 'mobile';
+        return this.columnDefinitions
+            .filter(cd => cd.showMobile === isMobile)
+            .map(cd => cd.def)[0];
     }
 
 }
