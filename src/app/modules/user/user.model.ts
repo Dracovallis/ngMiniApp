@@ -15,7 +15,7 @@ export class UserModel implements UserInterface {
 }
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class UserAdapter implements Adapter<UserModel> {
   adapt(item: any): UserModel {
