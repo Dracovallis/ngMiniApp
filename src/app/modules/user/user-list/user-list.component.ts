@@ -5,30 +5,30 @@ import {MatTableDataSource} from '@angular/material/table';
 import {LoaderComponent} from '../../core/loader/loader.component';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {fromEvent} from 'rxjs';
+import {AppService} from '../../../app.service';
 
 @Component({
     selector: 'app-user-list',
     templateUrl: './user-list.component.html',
     styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit, AfterViewInit {
-    columnDefinitions = [
-        {def: ['id', 'name', 'email', 'date_created', 'actions'], showMobile: false},
-        {def: ['id', 'name', 'actions'], showMobile: true},
-    ];
+export class UserListComponent implements OnInit {
+    columnDefinitions = {
+        deviceType: {
+            mobile: ['id', 'name', 'actions'],
+            tablet: ['id', 'name', 'email', 'actions'],
+            desktop: ['id', 'name', 'email', 'date_created', 'email_verified_at', 'actions'],
+        }
+    };
+    displayedColumns;
     usersDataSource;
-    currentDisplay;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private userService: UserService) {
-        if (window.innerWidth < 500) {
-            this.currentDisplay = 'mobile';
-        } else {
-            this.currentDisplay = 'desktop';
-        }
-
+    constructor(private userService: UserService, private appService: AppService) {
+        this.setInitialTableColumns();
     }
 
     ngOnInit(): void {
@@ -40,22 +40,42 @@ export class UserListComponent implements OnInit, AfterViewInit {
                 this.usersDataSource.sort = this.sort;
             });
         });
+
+
+        const resizeEv = fromEvent(window, 'resize');
+        resizeEv.subscribe(() => {
+            this.appService.mobile$.subscribe((isMobile) => {
+                if (isMobile) {
+                    this.displayedColumns = this.columnDefinitions.deviceType.mobile;
+                }
+            });
+
+            this.appService.tablet$.subscribe((isTablet) => {
+                if (isTablet) {
+                    this.displayedColumns = this.columnDefinitions.deviceType.tablet;
+                }
+            });
+
+            this.appService.desktop$.subscribe((isDesktop) => {
+                if (isDesktop) {
+                    this.displayedColumns = this.columnDefinitions.deviceType.desktop;
+                }
+            });
+        });
     }
 
-    ngAfterViewInit(): void {
-
+    setInitialTableColumns(): void {
+        if (window.innerWidth < 480) {
+            this.displayedColumns = this.columnDefinitions.deviceType.mobile;
+        } else if (window.innerWidth < 1024) {
+            this.displayedColumns = this.columnDefinitions.deviceType.tablet;
+        } else {
+            this.displayedColumns = this.columnDefinitions.deviceType.desktop;
+        }
     }
 
     applyFilter(event: Event): void {
         const filterValue = (event.target as HTMLInputElement).value;
         this.usersDataSource.filter = filterValue.trim().toLowerCase();
     }
-
-    getDisplayedColumns(): string[] {
-        const isMobile = this.currentDisplay === 'mobile';
-        return this.columnDefinitions
-            .filter(cd => cd.showMobile === isMobile)
-            .map(cd => cd.def)[0];
-    }
-
 }

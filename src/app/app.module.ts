@@ -17,6 +17,9 @@ import {UserDetailsComponent} from './modules/user/user-details/user-details.com
 import {UserListComponent} from './modules/user/user-list/user-list.component';
 import {UserElementComponent} from './modules/user/user-list/user-element/user-element.component';
 import {LoaderComponent} from './modules/core/loader/loader.component';
+import {AppService} from './app.service';
+import {reducerProvider, getReducers} from './statemanagement/root.reducer';
+import {StateObservable, Store, StoreModule} from '@ngrx/store';
 
 
 @NgModule({
@@ -26,7 +29,7 @@ import {LoaderComponent} from './modules/core/loader/loader.component';
         UserDetailsComponent,
         UserListComponent,
         UserElementComponent,
-        LoaderComponent
+        LoaderComponent,
     ],
     imports: [
         BrowserModule,
@@ -35,10 +38,14 @@ import {LoaderComponent} from './modules/core/loader/loader.component';
         ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
-        MaterialModules
+        MaterialModules,
+        StoreModule.forRoot(getReducers()),
     ],
     providers: [
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+        AppService,
+        reducerProvider,
+        Store
     ],
     bootstrap: [AppComponent]
 })
