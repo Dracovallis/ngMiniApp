@@ -20,6 +20,8 @@ import {LoaderComponent} from './modules/core/loader/loader.component';
 import {AppService} from './app.service';
 import {reducerProvider, getReducers} from './statemanagement/root.reducer';
 import {StateObservable, Store, StoreModule} from '@ngrx/store';
+import { PieChartComponent } from './modules/charts/amcharts/pie-chart/pie-chart.component';
+import { LineChartComponent } from './modules/charts/amcharts/line-chart/line-chart.component';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import {StateObservable, Store, StoreModule} from '@ngrx/store';
         UserListComponent,
         UserElementComponent,
         LoaderComponent,
+        PieChartComponent,
+        LineChartComponent,
     ],
     imports: [
         BrowserModule,
