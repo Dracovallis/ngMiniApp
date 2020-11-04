@@ -22,6 +22,7 @@ import {reducerProvider, getReducers} from './statemanagement/root.reducer';
 import {StateObservable, Store, StoreModule} from '@ngrx/store';
 import { PieChartComponent } from './modules/charts/amcharts/pie-chart/pie-chart.component';
 import { LineChartComponent } from './modules/charts/amcharts/line-chart/line-chart.component';
+import { ColumnChartComponent } from './modules/charts/amcharts/column-chart/column-chart.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { LineChartComponent } from './modules/charts/amcharts/line-chart/line-ch
         LoaderComponent,
         PieChartComponent,
         LineChartComponent,
+        ColumnChartComponent,
     ],
     imports: [
         BrowserModule,

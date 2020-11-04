@@ -5,6 +5,7 @@ import {UserDetailsComponent} from './modules/user/user-details/user-details.com
 import {UserListComponent} from './modules/user/user-list/user-list.component';
 import {PieChartComponent} from './modules/charts/amcharts/pie-chart/pie-chart.component';
 import {LineChartComponent} from './modules/charts/amcharts/line-chart/line-chart.component';
+import {ColumnChartComponent} from './modules/charts/amcharts/column-chart/column-chart.component';
 
 const routes: Routes = [
     {
@@ -26,6 +27,10 @@ const routes: Routes = [
     {
         path: 'charts/amchart/line-chart',
         component: LineChartComponent
+    },
+    {
+        path: 'charts/amchart/column-chart',
+        component: ColumnChartComponent
     },
 ];
 

@@ -1,1 +1,12 @@
-<div id="chartdiv" style="width: 100%; height: 500px"></div>
+<mat-form-field appearance="fill">
+    <mat-label>Select a team</mat-label>
+    <mat-select [(value)]="selected" (valueChange)="reloadChart()">
+        <mat-option value="">All teams</mat-option>
+        <mat-option value="0">BVB</mat-option>
+        <mat-option value="1">RB Leipzig</mat-option>
+        <mat-option value="2">Bayern</mat-option>
+        <mat-option value="3">Schalke</mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div id="piechartdiv" style="width: 100%; height: 500px"></div>

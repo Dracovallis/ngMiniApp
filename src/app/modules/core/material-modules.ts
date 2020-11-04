@@ -9,6 +9,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
     exports: [
@@ -21,7 +22,8 @@ import {MatSortModule} from '@angular/material/sort';
         MatToolbarModule,
         MatProgressSpinnerModule,
         MatPaginatorModule,
-        MatSortModule
+        MatSortModule,
+        MatSelectModule
     ]
 })
 export class MaterialModules {}
